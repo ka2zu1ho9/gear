@@ -116,7 +116,7 @@ void calculate_tooth_combination(){
         if(cnt > 0){
             printf("Don't meet the cnditions.\n");
         }
-        printf("select mode(0:known_sokuhi, 1:unknown_sokuhi)\n");
+        printf("select mode(0:known_sokuhi, 1:unknown_sokuhi, 2:calculate_error_of_sokuhi)\n");
         scanf("%d", &mode);
 
     } while (mode < 0);
@@ -337,6 +337,48 @@ void calculate_tooth_combination(){
     
         break;
 
+    case calculate_error_of_sokuhi:
+        do
+        {
+            printf("target velocity rate cnditions\n");
+            printf("target velocity rate > 1\n");
+
+            if(cnt > 0){
+                printf("Don't meet the cnditions.\n");
+            }
+
+            printf("target velocity rate = ");
+            scanf("%lf", &target_sokuhi);
+
+            cnt ++;            
+        } while (target_error > 1);
+        printf("\n");        
+        cnt = 0;
+        
+        do
+        {
+            printf("target velocity rate error cnditions\n");
+            printf("target velocity rate error > 0\n");
+
+            if(cnt > 0){
+                printf("Don't meet the cnditions.\n");
+            }
+
+            printf("target velocity rate error = ");
+            scanf("%lf", &target_error);
+
+            cnt ++;            
+        } while (target_error <= 0);
+        printf("\n");        
+        cnt = 0;
+
+        printf("----------------------------------------------------------------------------------\n");
+        printf("----------------------------------------------------------------------------------\n");
+        printf("minimum velocity rate\tmaximum velocity rate\n");
+        printf("%f\t\t%f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
+        printf("\n");
+
+        break;
     default:
         break;
     }
