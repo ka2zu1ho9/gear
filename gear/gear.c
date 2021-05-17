@@ -81,7 +81,7 @@ void processor_other_tooth_combination(double target_sokuhi, double target_error
     v[0] = pow(target_sokuhi, 1.0/3.0);
 
     printf("-----------------------------------------------------------------------------------------------\n");
-    printf("sokuhi1\t\tsokuhi2\t\tsokuhi3\t\toverall sokuhi\n");
+    printf("1段目の速比\t\t2段目の速比\t\t3段目の速比\t\t全体の速比\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     for(double k = -1.0; k < 1.0; k += 0.005){
@@ -110,13 +110,13 @@ void calculate_tooth_combination(){
     int cnt = 0;
     int mode = 0;
 
-    /* Enter mode */
+    /* モードを入力 */
     do
     {
         if(cnt > 0){
-            printf("Don't meet the cnditions.\n");
+            printf("条件と一致しません。\n");
         }
-        printf("select mode(0:known_sokuhi, 1:unknown_sokuhi, 2:calculate_error_of_sokuhi)\n");
+        printf("モードを選択してください。(0:1段の歯の組み合わせを求める, 1:全体の速比から、各段の歯の組み合わせを求める, 2:最大の速比と最小の速比を求める)\n");
         scanf("%d", &mode);
 
     } while (mode < 0);
@@ -126,16 +126,16 @@ void calculate_tooth_combination(){
     switch (mode)
     {
     case known_sokuhi:
-        /* Enter velocity rate */
+        /* 速比を入力 */
         do{
-            printf("velocity rate cnditions\n");
-            printf("velocity rate > 1\n");
+            printf("速比の条件\n");
+            printf("速比 > 1\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("velocity rate = ");
+            printf("速比 = ");
             scanf("%lf", &sokuhi);
 
             cnt ++;
@@ -143,16 +143,16 @@ void calculate_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* Enter tolerance range */
+        /* 速比の許容範囲を入力 */
         do{
-            printf("error range conditions\n");
-            printf("error range > 0\n");
+            printf("速比の許容範囲の条件\n");
+            printf("速比の許容範囲 > 0\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("error range = ");
+            printf("速比の許容範囲 = ");
             scanf("%lf", &error);
 
             cnt ++;
@@ -161,22 +161,22 @@ void calculate_tooth_combination(){
         cnt = 0;
 
         do{
-            printf("Is pinion? yes : 0 , no : 1\n");
-            printf("Anser = ");
+            printf("ピニオンはありますか? yes : 0 , no : 1\n");
+            printf("答え = ");
             scanf("%d", &is_pinion);
         }while(is_pinion > 1);
         printf("\n");
 
-        /* Minimum gear teeth */
+        /* 最小歯数を入力 */
         do{
-            printf("Minimum gear teeth conditions\n");
-            printf("Minimum gear teeth > 6\n");
+            printf("最小歯数の条件\n");
+            printf("Minimum gear teeth >= 6\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("z_min = ");
+            printf("最小歯数 = ");
             scanf("%d", &z_min);
 
             cnt ++;
@@ -184,16 +184,16 @@ void calculate_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* Maximum gear teeth */
+        /* 最大歯数の入力 */
         do{
-            printf("Maximum gear teeth conditions\n");
-            printf("Minimum gear teeth > z_min + 1\n");
+            printf("最大歯数の条件\n");
+            printf("最大歯数 > 最小歯数 + 1\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("z_max = ");
+            printf("最大歯数 = ");
             scanf("%d", &z_max);
 
             cnt ++;
@@ -202,23 +202,23 @@ void calculate_tooth_combination(){
         cnt = 0; 
 
         printf("----------------------------------------------------------------------------------\n");
-        printf("z1\tz2\tz2/z1\t\trate\t\trepeat frequency(Greatest common divisor)\n");
+        printf("z1\tz2\tz2/z1\t\trate\t\t繰り返し頻度(最大公約数)\n");
         printf("----------------------------------------------------------------------------------\n");
         processor_base_tooth_combination(sokuhi, error, z_min, z_max, is_pinion);   
         break;
 
     case unknown_sokuhi:
-        /* Enter target velocity rate */
+        /* 全体の理想速比を入力 */
         do
         {
-            printf("overall velocity rate cnditions\n");
-            printf("overall velocity rate > 1\n");
+            printf("全体の理想速比\n");
+            printf("全体の理想速比 > 1\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("overall velocity rate = ");
+            printf("条件全体の理想速比 = ");
             scanf("%lf", &target_sokuhi);
 
             cnt ++;
@@ -228,14 +228,14 @@ void calculate_tooth_combination(){
 
         do
         {
-            printf("overall velocity rate error cnditions\n");
-            printf("overall velocity rate error > 0\n");
+            printf("条件全体の理想速比の許容範囲\n");
+            printf("条件全体の理想速比の許容範囲 > 0\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("overall velocity rate error = ");
+            printf("条件全体の理想速比の許容範囲= ");
             scanf("%lf", &target_error);
 
             cnt ++;            
@@ -249,14 +249,14 @@ void calculate_tooth_combination(){
         for(int i = 0; i < 3; i++){
             do
             {
-                printf("using velocity rate %d cnditions\n", i+1);
-                printf("using velocity rate %d > 1\n", i+1);
+                printf("使用する%d段目の速比の条件\n", i+1);
+                printf("使用する%d段目の速比 > 1\n", i+1);
 
                 if(cnt > 0){
-                    printf("Don't meet the cnditions.\n");
+                    printf("条件が一致しません。\n");
                 }
 
-                printf("using velocity rate %d = ", i+1);
+                printf("使用する%d段目の速比 = ", i+1);
                 scanf("%lf", &v[i]);
 
                 cnt ++;
@@ -265,16 +265,16 @@ void calculate_tooth_combination(){
             cnt = 0;
         }
 
-        /* Enter tolerance range */
+        /* 速比の許容範囲を入力 */
         do{
-            printf("error range conditions\n");
-            printf("error range > 0\n");
+            printf("速比の許容範囲の条件\n");
+            printf("速比の許容範囲 > 0\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("error range = ");
+            printf("速比の許容範囲 = ");
             scanf("%lf", &error);
 
             cnt ++;
@@ -283,22 +283,22 @@ void calculate_tooth_combination(){
         cnt = 0;
 
         do{
-            printf("Is pinion? yes : 0 , no : 1\n");
-            printf("Anser = ");
+            printf("ピニオンはありますか? yes : 0 , no : 1\n");
+            printf("答え = ");
             scanf("%d", &is_pinion);
         }while(is_pinion > 1);
         printf("\n");
 
-        /* Minimum gear teeth */
+        /* 最小歯数を入力 */
         do{
-            printf("Minimum gear teeth conditions\n");
-            printf("Minimum gear teeth > 6\n");
+            printf("最小歯数の条件\n");
+            printf("Minimum gear teeth >= 6\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("z_min = ");
+            printf("最小歯数 = ");
             scanf("%d", &z_min);
 
             cnt ++;
@@ -306,16 +306,16 @@ void calculate_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* Maximum gear teeth */
+        /* 最大歯数の入力 */
         do{
-            printf("Maximum gear teeth conditions\n");
-            printf("Minimum gear teeth > z_min + 1\n");
+            printf("最大歯数の条件\n");
+            printf("最大歯数 > 最小歯数 + 1\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("z_max = ");
+            printf("最大歯数 = ");
             scanf("%d", &z_max);
 
             cnt ++;
@@ -328,8 +328,8 @@ void calculate_tooth_combination(){
                 is_pinion = 1;
             }
             printf("----------------------------------------------------------------------------------\n");
-            printf("%d stage condition.\n", i+1);
-            printf("z1\tz2\tz2/z1\t\trate\t\trepeat frequency(Greatest common divisor)\n");
+            printf("%d段目の条件\n", i+1);
+            printf("z1\tz2\tz2/z1\t\trate\t\t繰り返し頻度(最大公約数)\n");
             printf("----------------------------------------------------------------------------------\n");
             processor_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
             printf("\n");
@@ -340,14 +340,14 @@ void calculate_tooth_combination(){
     case calculate_error_of_sokuhi:
         do
         {
-            printf("target velocity rate cnditions\n");
-            printf("target velocity rate > 1\n");
+            printf("理想速比の条件\n");
+            printf("理想速比 > 1\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("target velocity rate = ");
+            printf("理想速比 = ");
             scanf("%lf", &target_sokuhi);
 
             cnt ++;            
@@ -357,14 +357,14 @@ void calculate_tooth_combination(){
         
         do
         {
-            printf("target velocity rate error cnditions\n");
-            printf("target velocity rate error > 0\n");
+            printf("理想速比からの許容範囲の条件\n");
+            printf("理想速比からの許容範囲 > 0\n");
 
             if(cnt > 0){
-                printf("Don't meet the cnditions.\n");
+                printf("条件が一致しません。\n");
             }
 
-            printf("target velocity rate error = ");
+            printf("理想速比からの許容範囲 = ");
             scanf("%lf", &target_error);
 
             cnt ++;            
@@ -374,7 +374,7 @@ void calculate_tooth_combination(){
 
         printf("----------------------------------------------------------------------------------\n");
         printf("----------------------------------------------------------------------------------\n");
-        printf("minimum velocity rate\tmaximum velocity rate\n");
+        printf("最小速比\t最大速比\n");
         printf("%f\t\t%f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
         printf("\n");
 

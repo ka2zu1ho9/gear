@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <math.h>
 
-/* è¨ˆç®—ãƒ¢ãƒ¼ãƒ‰ã®æ•° */
-#define MODE_NUMBER 2
-/* ãƒ¢ãƒ¼ã‚¿å‡ºåŠ›(W[rpm])*/
+/* ŒvZƒ‚[ƒh‚Ì” */
+#define MODE_NUMBER 3
+/* ƒ‚[ƒ^o—Í(W[rpm])*/
 #define OUTPUT_OF_MOTOR 7500
 
 enum{
