@@ -81,7 +81,7 @@ void processor_other_tooth_combination(double target_sokuhi, double target_error
     v[0] = pow(target_sokuhi, 1.0/3.0);
 
     printf("-----------------------------------------------------------------------------------------------\n");
-    printf("1段目の速比\t\t2段目の速比\t\t3段目の速比\t\t全体の速比\n");
+    printf("1段目の速比\t2段目の速比\t3段目の速比\t全体の速比\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     for(double k = -1.0; k < 1.0; k += 0.005){
@@ -375,7 +375,7 @@ void calculate_tooth_combination(){
         printf("----------------------------------------------------------------------------------\n");
         printf("----------------------------------------------------------------------------------\n");
         printf("最小速比\t最大速比\n");
-        printf("%f\t\t%f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
+        printf("%f\t%f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
         printf("\n");
 
         break;
