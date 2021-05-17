@@ -7,7 +7,7 @@ int main(void){
 
     while(1){
         if(cnt > 0){
-            printf("Do you want to continue the calculation?\n");
+            printf("åvéZÇë±ÇØÇ‹Ç∑Ç©ÅH\n");
             printf("yes:0,no:1\n");
             scanf("%d", &is_keeping_while);   
             printf("\n");

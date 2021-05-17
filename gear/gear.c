@@ -143,16 +143,16 @@ void calculate_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* 速比の許容範囲を入力 */
+        /* 理想速比からの許容範囲を入力 */
         do{
-            printf("速比の許容範囲の条件\n");
-            printf("速比の許容範囲 > 0\n");
+            printf("理想速比からの許容範囲の条件\n");
+            printf("理想速比からの許容範囲 > 0\n");
 
             if(cnt > 0){
                 printf("条件が一致しません。\n");
             }
 
-            printf("速比の許容範囲 = ");
+            printf("理想速比からの許容範囲 = ");
             scanf("%lf", &error);
 
             cnt ++;
@@ -228,14 +228,14 @@ void calculate_tooth_combination(){
 
         do
         {
-            printf("条件全体の理想速比の許容範囲\n");
-            printf("条件全体の理想速比の許容範囲 > 0\n");
+            printf("全体の理想速比からの許容範囲\n");
+            printf("全体の理想速比からの許容範囲 > 0\n");
 
             if(cnt > 0){
                 printf("条件が一致しません。\n");
             }
 
-            printf("条件全体の理想速比の許容範囲= ");
+            printf("全体の理想速比からの許容範囲= ");
             scanf("%lf", &target_error);
 
             cnt ++;            
@@ -265,16 +265,16 @@ void calculate_tooth_combination(){
             cnt = 0;
         }
 
-        /* 速比の許容範囲を入力 */
+        /* 理想速比からの許容範囲を入力 */
         do{
-            printf("速比の許容範囲の条件\n");
-            printf("速比の許容範囲 > 0\n");
+            printf("理想速比からの許容範囲の条件\n");
+            printf("理想速比からの許容範囲 > 0\n");
 
             if(cnt > 0){
                 printf("条件が一致しません。\n");
             }
 
-            printf("速比の許容範囲 = ");
+            printf("理想速比からの許容範囲 = ");
             scanf("%lf", &error);
 
             cnt ++;
