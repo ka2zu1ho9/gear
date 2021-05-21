@@ -84,12 +84,12 @@ void processor_other_tooth_combination(double target_sokuhi, double target_error
     printf("1段目の速比\t2段目の速比\t3段目の速比\t全体の速比\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
-    for(double k = -1.0; k < 1.0; k += 0.005){
+    for(double k = -3.0; k < 3.0; k += 0.0005){
         v[1] = v[0] + k;
         v[2] = v[1] + 2*k;
         real_sokuhi = v[0]*v[1]*v[2];
 
-        if( ( (1-target_error)*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+target_error)*target_sokuhi ) ){
+        if( ( (1-(target_error/100.0))*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+(target_error/100.0))*target_sokuhi ) ){
             real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
             printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
         }

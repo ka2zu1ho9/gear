@@ -17,7 +17,7 @@ int main(void){
             }
         }
         calculate_tooth_combination();
-        cnt ++;
+        cnt = 1;
     }
 
     return 0;
