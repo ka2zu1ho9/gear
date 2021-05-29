@@ -51,7 +51,7 @@ void processor_base_tooth_combination(
                     gcd_result = gcd(j,i);
 
                     if( fabs(gosa) < sokuhi * (error/100) ){
-                        printf("%d\t%3d\t%f\t%f\t%f(%f)\n", i, j, sokuhi1, rate, repeat_frequency, gcd_result);
+                        printf("%d\t%3d\t%f\t%f\t%f(%f)\n", i, j, sokuhi1, gosa, repeat_frequency, gcd_result);
                     }
                 } 
             }
@@ -67,7 +67,7 @@ void processor_base_tooth_combination(
             gcd_result = gcd(j,z_min);
 
             if( fabs(gosa) < sokuhi * (error/100) ){
-                printf("%d\t%3d\t%f\t%f\t%f(%f)\n", z_min, j, sokuhi1, rate, repeat_frequency, gcd_result);
+                printf("%d\t%3d\t%f\t%f\t%f(%f)\n", z_min, j, sokuhi1, gosa, repeat_frequency, gcd_result);
             }
         }   
     }
@@ -202,7 +202,7 @@ void calculate_tooth_combination(){
         cnt = 0; 
 
         printf("----------------------------------------------------------------------------------\n");
-        printf("z1\tz2\tz2/z1\t\trate\t\tŒJ‚è•Ô‚µ•p“x(Å‘åŒö–ñ”)\n");
+        printf("z1\tz2\tz2/z1\t\tŒë·\t\tŒJ‚è•Ô‚µ•p“x(Å‘åŒö–ñ”)\n");
         printf("----------------------------------------------------------------------------------\n");
         processor_base_tooth_combination(sokuhi, error, z_min, z_max, is_pinion);   
         break;
@@ -329,7 +329,7 @@ void calculate_tooth_combination(){
             }
             printf("----------------------------------------------------------------------------------\n");
             printf("%d’i–Ú‚ÌðŒ\n", i+1);
-            printf("z1\tz2\tz2/z1\t\trate\t\tŒJ‚è•Ô‚µ•p“x(Å‘åŒö–ñ”)\n");
+            printf("z1\tz2\tz2/z1\t\tŒë·\t\tŒJ‚è•Ô‚µ•p“x(Å‘åŒö–ñ”)\n");
             printf("----------------------------------------------------------------------------------\n");
             processor_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
             printf("\n");
