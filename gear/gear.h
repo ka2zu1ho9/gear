@@ -14,7 +14,9 @@ enum{
 
 int gcd(int large_number, int small_number);
 
-void calcuate_sokuhi_from_giving_condition(
+void cal_engagement_pitch_circle(double module, double z1, double z2);
+
+void cal_sokuhi_from_giving_condition(
     double weight_object, 
     double weight_one_unit, 
     double shita, 
@@ -22,7 +24,7 @@ void calcuate_sokuhi_from_giving_condition(
     double radius_of_winding
 );
 
-void processor_base_tooth_combination(double sokuhi, double error, int z_min, int z_max, int is_pinion);
-void processor_other_tooth_combination(double target_sokuhi, double error);
+void pro_base_tooth_combination(double sokuhi, double error, int z_min, int z_max, int is_pinion);
+void pro_other_tooth_combination(double target_sokuhi, double error);
 
-void calculate_tooth_combination();
+void cal_tooth_combination();

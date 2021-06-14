@@ -28,8 +28,11 @@ int gcd(int large_number, int small_number){
     return divisor;
 }
 
+void cal_engagement_pitch_circlue(){
 
-void processor_base_tooth_combination(
+}
+
+void pro_base_tooth_combination(
     double sokuhi, 
     double error, 
     int z_min, 
@@ -73,7 +76,7 @@ void processor_base_tooth_combination(
     }
 }
 
-void processor_other_tooth_combination(double target_sokuhi, double target_error){    
+void pro_other_tooth_combination(double target_sokuhi, double target_error){    
     int increase_first_stage_gear_ratio_flag = 1;
     double loop_v,r;
     double v[3];
@@ -225,7 +228,7 @@ void calculate_tooth_combination(){
         printf("----------------------------------------------------------------------------------\n");
         printf("z1\tz2\tz2/z1\t\tåÎç∑\t\tåJÇËï‘Çµïpìx(ç≈ëÂåˆñÒêî)\n");
         printf("----------------------------------------------------------------------------------\n");
-        processor_base_tooth_combination(sokuhi, error, z_min, z_max, is_pinion);   
+        pro_base_tooth_combination(sokuhi, error, z_min, z_max, is_pinion);   
         break;
 
     case unknown_sokuhi:
@@ -264,7 +267,7 @@ void calculate_tooth_combination(){
         printf("\n");        
         cnt = 0;
 
-        processor_other_tooth_combination(target_sokuhi, target_error);
+        pro_other_tooth_combination(target_sokuhi, target_error);
         printf("\n");
 
         for(int i = 0; i < 3; i++){
@@ -352,7 +355,7 @@ void calculate_tooth_combination(){
             printf("%díiñ⁄ÇÃèåè\n", i+1);
             printf("z1\tz2\tz2/z1\t\tåÎç∑\t\tåJÇËï‘Çµïpìx(ç≈ëÂåˆñÒêî)\n");
             printf("----------------------------------------------------------------------------------\n");
-            processor_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
+            pro_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
             printf("\n");
         }
     
