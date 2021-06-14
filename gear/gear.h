@@ -20,7 +20,7 @@ void calcuate_sokuhi_from_giving_condition(
     double shita, 
     double u, 
     double radius_of_winding
-    );
+);
 
 void processor_base_tooth_combination(double sokuhi, double error, int z_min, int z_max, int is_pinion);
 void processor_other_tooth_combination(double target_sokuhi, double error);

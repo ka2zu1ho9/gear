@@ -73,7 +73,9 @@ void processor_base_tooth_combination(
     }
 }
 
-void processor_other_tooth_combination(double target_sokuhi, double target_error){
+void processor_other_tooth_combination(double target_sokuhi, double target_error){    
+    int increase_first_stage_gear_ratio_flag = 1;
+    double loop_v,r;
     double v[3];
     double real_sokuhi;
     double real_error;
@@ -84,14 +86,33 @@ void processor_other_tooth_combination(double target_sokuhi, double target_error
     printf("1段目の速比\t2段目の速比\t3段目の速比\t全体の速比\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
-    for(double k = -3.0; k < 3.0; k += 0.0005){
-        v[1] = v[0] + k;
-        v[2] = v[1] + 2*k;
-        real_sokuhi = v[0]*v[1]*v[2];
+    if(increase_first_stage_gear_ratio_flag == 0){
+        for(double k = -3.0; k < 3.0; k += 0.0005){
+            v[1] = v[0] + k;
+            v[2] = v[1] + 2*k;
+            real_sokuhi = v[0]*v[1]*v[2];
 
-        if( ( (1-(target_error/100.0))*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+(target_error/100.0))*target_sokuhi ) ){
-            real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
-            printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
+            if( ( (1-(target_error/100.0))*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+(target_error/100.0))*target_sokuhi ) ){
+                real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
+                printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
+            }
+        }
+    }else if(increase_first_stage_gear_ratio_flag == 1){
+        loop_v = pow(target_sokuhi, 1.0/3.0);
+        r = loop_v / 3;
+        v[0] = loop_v + (2 * r);
+
+        for(double k = -3.0; k < 3.0; k += 0.0005){
+            v[1] = loop_v + 2*k;
+            v[2] = r + k;
+            real_sokuhi = v[0]*v[1]*v[2];
+
+            if( ( (1-(target_error/100.0))*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+(target_error/100.0))*target_sokuhi ) 
+            && v[0] > 0 && v[1] > 0 && v[2] > 0){
+
+                real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
+                printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
+            }
         }
     }
 }
