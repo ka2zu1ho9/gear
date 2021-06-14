@@ -28,8 +28,8 @@ int gcd(int large_number, int small_number){
     return divisor;
 }
 
-void cal_engagement_pitch_circlue(){
-
+void cal_engagement_pitch_circle(double module, int z){
+    printf("%f\n", (module*z)/2.0 );
 }
 
 void pro_base_tooth_combination(
@@ -77,7 +77,7 @@ void pro_base_tooth_combination(
 }
 
 void pro_other_tooth_combination(double target_sokuhi, double target_error){    
-    int increase_first_stage_gear_ratio_flag = 1;
+    int increase_first_stage_gear_ratio_flag = 0;
     double loop_v,r;
     double v[3];
     double real_sokuhi;
@@ -120,7 +120,7 @@ void pro_other_tooth_combination(double target_sokuhi, double target_error){
     }
 }
 
-void calculate_tooth_combination(){
+void cal_tooth_combination(){
     double sokuhi = 0;
     double error = 0;
 
@@ -128,9 +128,13 @@ void calculate_tooth_combination(){
     double target_sokuhi = 0;
     double target_error = 0;
 
+    int z[6] = {0};
+    double module[3] = {0};
+
     int z_min = 0;
     int z_max = 0;
     int is_pinion = 2;
+    int do_cal_engagement_pitch_circle = 2;
     int cnt = 0;
     int mode = 0;
 
@@ -357,6 +361,41 @@ void calculate_tooth_combination(){
             printf("----------------------------------------------------------------------------------\n");
             pro_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
             printf("\n");
+        }
+
+        do{
+            if(cnt > 0){
+                printf("条件が一致しません。\n");
+            }
+            
+            printf("かみ合いピッチ円を計算しますか？y : 0, n : 1\n"); 
+            scanf("%d", &do_cal_engagement_pitch_circle);
+            cnt ++;
+        } while(do_cal_engagement_pitch_circle > 1);
+        printf("\n");
+        cnt = 0; 
+
+        if(do_cal_engagement_pitch_circle == 0){
+            for(int i = 0; i < 3; i++){
+                printf("選択したmoduleを一段目から順に入力してください。\n");
+                printf("module[%d] = ", i);
+                scanf("%lf", &module[i]);
+            }
+
+            for(int i = 0; i < 6; i++){
+                printf("選択した歯数を一段目から順に入力してください。\n");
+                printf("z[%d] = ", i);
+                scanf("%d", &z[i]);
+            }
+
+            for(int i = 0; i < 6; i++){
+                printf("rk%d = ", i);
+                if(i < 3){
+                    cal_engagement_pitch_circle(module[i], z[i]);
+                }else{
+                    cal_engagement_pitch_circle(module[i-3], z[i]);
+                }
+            }
         }
     
         break;

@@ -14,7 +14,7 @@ enum{
 
 int gcd(int large_number, int small_number);
 
-void cal_engagement_pitch_circle(double module, double z1, double z2);
+void cal_engagement_pitch_circle(double module, int z);
 
 void cal_sokuhi_from_giving_condition(
     double weight_object, 

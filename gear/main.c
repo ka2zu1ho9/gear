@@ -16,7 +16,7 @@ int main(void){
                 break;
             }
         }
-        calculate_tooth_combination();
+        cal_tooth_combination();
         cnt = 1;
     }
 
