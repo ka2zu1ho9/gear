@@ -1,5 +1,15 @@
 #include "gear.h"
 
+void input_int(char str[], int* data){
+    printf("%s", str);
+    scanf("%d", data);
+}
+
+void input_double(char str[], double* data){
+    printf("%s", str);
+    scanf("%lf", data);
+}
+
 int gcd(int large_number, int small_number){
     int temp;
     int dividend,divisor;
@@ -28,8 +38,56 @@ int gcd(int large_number, int small_number){
     return divisor;
 }
 
-void cal_engagement_pitch_circle(double module, int z){
+double inv(double angle){
+    return (tan(angle * (M_PI/180)) - angle);
+}
+
+void cal_base_pitch_circle(double module, int z){
     printf("%f\n", (module*z)/2.0 );
+}
+
+void cal_engagementpitch_circle(int mode, int z1, int z2, double a){
+    if(mode == 1){
+        printf("%f\n", (z1 * a) / (z1 + z2) );
+    }else if(mode == 2){
+        printf("%f\n", (z2 * a) / (z1 + z2) );
+    }
+}
+
+void cal_engagement_press_angle(int z1, int z2, double center_distance_increase){
+    double result;
+
+    result = acos( ( (z1 + z2) / (z1 + z2 + 2*center_distance_increase) )*cos(20*(M_PI/180)) );
+    printf("%f\n", result);
+}
+
+void cal_backlush_on_pitch_circle(double engagement_press_angle, double module, int z1, int z2){
+    double result;
+
+    result = ( cos(20*(M_PI/180)) / cos(engagement_press_angle*(M_PI/180)) )*module*(z1 + z2)*(inv(engagement_press_angle) - inv(20));
+    printf("%f\n", result);
+}
+
+void cal_tolerance_unit(double base_pitch_circle, double module){
+    printf("%f\n", cbrt(base_pitch_circle) + 0.65*module);
+}
+
+void cal_center_distance_increase(double module, double a, int z1, int z2){
+    printf("%f\n", (a/module) - (z1 + z2)/2 );
+}
+
+void cal_tooth_tip_circle(int z, double module, double center_distance_increase, double transfer){
+    printf("%f\n", (z + 2) * module + 2*module*(center_distance_increase - transfer));
+}
+
+void cal_gear_base_circle(double base_pitch_circle){
+    printf("%f\n", (base_pitch_circle/2)*cos(20*(M_PI/180)));
+}
+
+void cal_engagement_length(double tooth_tip_radius[], double gear_base_radius[], double a, double press_angle){
+    double result;
+
+    result = sqrt( tooth_tip_radius[0]*tooth_tip_radius[0] - gear_base_radius[0]*gear_base_radius[0]) + sqrt( tooth_tip_radius[1]*tooth_tip_radius[1] - gear_base_radius[1]*gear_base_radius[1]);
 }
 
 void pro_base_tooth_combination(
@@ -120,7 +178,114 @@ void pro_other_tooth_combination(double target_sokuhi, double target_error){
     }
 }
 
-void cal_tooth_combination(){
+void pro_gear_strenrth(){
+    int cnt = 0;
+    int z[2] = {0};
+    int module;
+
+    double a,b,gear_coefficient;
+
+    double n_in;
+    double H;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("歯数1 = \n");
+        scanf("%d", &z[0]);
+
+    } while (z[0] < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("歯数2 = \n");
+        scanf("%d", &z[1]);
+
+    } while (z[1] < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("モジュール = \n");
+        scanf("%d", &module);
+
+    } while (module < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("中心距離[mm] = \n");
+        scanf("%d", &a);
+
+    } while (a < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("歯幅[mm] = \n");
+        scanf("%d", &a);
+
+    } while (b < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("歯数係数 = \n");
+        scanf("%d", &gear_coefficient);
+
+    } while (gear_coefficient < 0);
+    printf("\n");
+    cnt = 0;            
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("歯数係数 = \n");
+        scanf("%d", &n_in);
+
+    } while (n_in < 0);
+    printf("\n");
+    cnt = 0;
+
+    do
+    {
+        if(cnt > 0){
+            printf("条件と一致しません。\n");
+        }
+        printf("動力伝達係数 = \n");
+        scanf("%d", &H);
+
+    } while (H < 0);
+    printf("\n");
+    cnt = 0;
+}
+
+void pro_tooth_combination(){
     double sokuhi = 0;
     double error = 0;
 
@@ -391,9 +556,9 @@ void cal_tooth_combination(){
             for(int i = 0; i < 6; i++){
                 printf("rk%d = ", i);
                 if(i < 3){
-                    cal_engagement_pitch_circle(module[i], z[i]);
+                   cal_base_pitch_circle(module[i], z[i]);
                 }else{
-                    cal_engagement_pitch_circle(module[i-3], z[i]);
+                   cal_base_pitch_circle(module[i-3], z[i]);
                 }
             }
         }
@@ -445,4 +610,22 @@ void cal_tooth_combination(){
     default:
         break;
     }
+}
+
+void pro_gear_strength(){
+    int z1, z2;
+    double module, a, b, y, n_in, H;
+    double bending_fatigue;
+    double compression_fatigue;
+
+    input_int("z1 = ", &z1);
+    input_int("z2 = ", &z2);
+    input_double("module = ", &module);
+    input_double("a = ", &a);
+    input_double("b = ", &b);
+    input_double("y = ", &y);
+    input_double("n_in = ", &n_in);
+    input_double("H = ", &H);
+    input_double("曲げ疲れ限度 = ", &bending_fatigue);
+    input_double("圧縮疲れ限度 = ", &compression_fatigue);
 }

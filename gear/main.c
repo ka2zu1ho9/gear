@@ -3,6 +3,7 @@
 
 int main(void){
     int is_keeping_while = 1;
+    int mode = 0;
     int cnt = 0;
 
     while(1){
@@ -16,7 +17,15 @@ int main(void){
                 break;
             }
         }
-        cal_tooth_combination();
+
+        input_int("mode = (0:tooth_combination, 1:gear_strength)", &mode);
+
+        if(mode == 0){
+            pro_tooth_combination();
+        }else if(mode == 1){
+            pro_gear_strength();
+        }
+        
         cnt = 1;
     }
 
