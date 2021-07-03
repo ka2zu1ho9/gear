@@ -6,7 +6,6 @@ int main(void){
     int mode = 0;
     int cnt = 0;
 
-    printf("%f\n", E);
     while(1){
         if(cnt > 0){
             printf("ŒvZ‚ğ‘±‚¯‚Ü‚·‚©H\n");

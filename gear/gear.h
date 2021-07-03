@@ -23,6 +23,9 @@ enum{
 double l, te;
 double y;
 double engagement_press_angle;
+double W[2];
+double backlush;
+double backlush_lmit[2];
 double base_pitch_circle[2];
 double tooth_tip_circle[2];
 double gear_base_circle[2];
@@ -46,6 +49,7 @@ void cal_engagement_pitch_circle(int mode, int z1, int z2, double a);
 void cal_engagement_press_angle(int z1, int z2, double center_distance_increase);
 void cal_backlush_on_pitch_circle(double module, int z1, int z2);
 void cal_tolerance_unit(double base_pitch_circle, double module);
+void cal_max_and_min_backlush(int mode);
 void cal_center_distance_increase(double module, double a, int z1, int z2);
 void cal_tooth_tip_circle(int mode, int z, double module, double center_distance_increase, double transfer);
 void cal_gear_base_circle(int mode);

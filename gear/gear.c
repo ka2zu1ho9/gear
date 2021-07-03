@@ -61,18 +61,49 @@ void cal_engagement_pitch_circle(int mode, int z1, int z2, double a){
 }
 
 void cal_backlush_on_pitch_circle(double module, int z1, int z2){
-    double result;
 
-    result = ( cos(20*(M_PI/180.0)) / cos(engagement_press_angle*(M_PI/180.0)) )*module*(z1 + z2)*(inv(engagement_press_angle) - inv(20));
-    printf("%.4f[mm]\n", result);
+    backlush = ( cos(20*(M_PI/180.0)) / cos(engagement_press_angle*(M_PI/180.0)) )*module*(z1 + z2)*(inv(engagement_press_angle) - inv(20));
+    printf("%.4f[mm]\n", backlush);
 }
 
 void cal_tolerance_unit(double mode, double module){
     if(mode == 1){
-        printf("%.4f[μm]\n", cbrt(base_pitch_circle[0]) + 0.65*module);
+        W[0] = cbrt(base_pitch_circle[0]) + 0.65*module;
+        printf("%.4f[μm]\n", W[0]);
     }else if(mode == 2){
-        printf("%.4f[μm]\n", cbrt(base_pitch_circle[1]) + 0.65*module);
+        W[1] = cbrt(base_pitch_circle[1]) + 0.65*module;
+        printf("%.4f[μm]\n", W[1]);
     }
+}
+
+void cal_max_and_min_backlush(int mode){
+    double gear1_backlush[2];
+    double gear2_backlush[2];
+    if(mode == 1){
+        //最大
+        gear1_backlush[0] = 35.5*(W[0] / pow(10,3));
+    }else{
+        //最小
+        gear1_backlush[1] = 10.0*(W[0] / pow(10,3));
+    }
+    
+    if(mode == 1){
+        // 最大
+        gear2_backlush[0] = 35.5*(W[1] / pow(10,3));
+    }else{
+        // 最小
+        gear2_backlush[1] = 10.0*(W[1] / pow(10,3));
+    }
+
+    if(mode == 1){
+        backlush_lmit[0] = gear1_backlush[0] + gear2_backlush[0];
+        printf("%f\n", backlush_lmit[0]);
+    }else{
+        backlush_lmit[1] = gear1_backlush[1] + gear2_backlush[1];
+        printf("%f\n", backlush_lmit[1]);
+    }
+
+
 }
 
 void cal_center_distance_increase(double module, double a, int z1, int z2){
@@ -771,6 +802,10 @@ void pro_gear_strength(){
     cal_engagement_press_angle(z1, z2, a);
     printf("ピッチ円上バックラッシC0 = ");
     cal_backlush_on_pitch_circle(module, z1, z2);
+    printf("  最大バックラッシC0_max = ");
+    cal_max_and_min_backlush(1);
+    printf("  最小バックラッシC0_min = ");
+    cal_max_and_min_backlush(2);
     printf("\t   刃先円直径dk1 = ");
     cal_tooth_tip_circle(1, z1, module, y, 0);
     printf("\t   刃先円直径dk2 = ");
@@ -813,6 +848,13 @@ void pro_gear_strength(){
 
     printf("圧縮応力\t");
     if(safe_rate[1] >= compression_fatigue){
+        printf("OK\n");
+    }else{
+        printf("NG\n");
+    }
+
+    printf("バックラッシ\t");
+    if(backlush_lmit[1] <= backlush && backlush <= backlush_lmit[0]){
         printf("OK\n");
     }else{
         printf("NG\n");
