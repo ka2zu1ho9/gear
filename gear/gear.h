@@ -12,7 +12,7 @@
 
 // const double elastic_module = 2 * 10*10*10*10*10*10;
 // const double poason_rate = 0.33;
-#define E  (double)0.8 * 10*10*10*10*10*10
+#define E  (double)2 * 10*10*10*10*10*10
 
 enum{
     known_sokuhi = 0,
@@ -32,6 +32,7 @@ double tanquent_force[2];
 double bending_stress[2];
 double curvanture_radius[2];
 double compressive_stress[2];
+double safe_rate[2];
 
 void input_int(char str[], int* data);
 void input_double(char str[], double* data);
@@ -54,7 +55,7 @@ void cal_engagement_rate();
 void cal_shaft_torque(int mode, double n_in, double H);
 void cal_varitical_force(int mode);
 void cal_tanquent_force(int mode);
-void cal_bending_stress(int mode, double module, double b);
+void cal_bending_stress(int mode, double module, double b, double gear_fatigue);
 void cal_safe_rate(int cal_mode, int mode,  double fatigue);
 void cal_curvanture_radius(int mode);
 void cal_compressive_stress(int mode, double b);

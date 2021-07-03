@@ -39,39 +39,39 @@ int gcd(int large_number, int small_number){
 }
 
 double inv(double angle){
-    return (tan(angle * (M_PI/180)) - angle);
+    return (tan(angle * (M_PI/180)) - angle*(M_PI/180));
 }
 
 void cal_base_pitch_circle(int mode, double module, int z){
     if(mode == 1){
         base_pitch_circle[0] = module*z;
-        printf("%f\n", module*z);
+        printf("%.4f[mm]\n", module*z);
     }else{
         base_pitch_circle[1] = module*z;
-        printf("%f\n", module*z );
+        printf("%.4f[mm]\n", module*z );
     }
 }
 
 void cal_engagement_pitch_circle(int mode, int z1, int z2, double a){
     if(mode == 1){
-        printf("%f\n", (z1 * a) / (z1 + z2) );
+        printf("%.4f[mm]\n", (z1 * a) / (z1 + z2) );
     }else if(mode == 2){
-        printf("%f\n", (z2 * a) / (z1 + z2) );
+        printf("%.4f[mm]\n", (z2 * a) / (z1 + z2) );
     }
 }
 
 void cal_backlush_on_pitch_circle(double module, int z1, int z2){
     double result;
 
-    result = ( cos(20*(M_PI/180)) / cos(engagement_press_angle*(M_PI/180)) )*module*(z1 + z2)*(inv(engagement_press_angle) - inv(20));
-    printf("%f\n", result);
+    result = ( cos(20*(M_PI/180.0)) / cos(engagement_press_angle*(M_PI/180.0)) )*module*(z1 + z2)*(inv(engagement_press_angle) - inv(20));
+    printf("%.4f[mm]\n", result);
 }
 
 void cal_tolerance_unit(double mode, double module){
     if(mode == 1){
-        printf("%f\n", cbrt(base_pitch_circle[0]) + 0.65*module);
+        printf("%.4f[É m]\n", cbrt(base_pitch_circle[0]) + 0.65*module);
     }else if(mode == 2){
-        printf("%f\n", cbrt(base_pitch_circle[1]) + 0.65*module);
+        printf("%.4f[É m]\n", cbrt(base_pitch_circle[1]) + 0.65*module);
     }
 }
 
@@ -80,7 +80,7 @@ void cal_center_distance_increase(double module, double a, int z1, int z2){
 
     y = (a/module) - ( (double)(z1 + z2)/2.0);
 
-    printf("%f\n", y);
+    printf("%.4f\n", y);
 }
 
 void cal_engagement_press_angle(int z1, int z2, double center_distance_increase){
@@ -88,103 +88,104 @@ void cal_engagement_press_angle(int z1, int z2, double center_distance_increase)
 
     result = acos( ( (double)(z1 + z2) / (double)(z1 + z2 + 2*y) ) * cos(20*M_PI/180.0)) * (180.0/M_PI);
     engagement_press_angle = result;
-    printf("%f\n", result);
+    printf("%.4f[deg]\n", result);
 }
 
 void cal_tooth_tip_circle(int mode, int z, double module, double center_distance_increase, double transfer){
     if(mode == 1){
         tooth_tip_circle[0] = (z + 2) * module + 2*module*(center_distance_increase - transfer);
-        printf("%f\n", (z + 2) * module + 2*module*(center_distance_increase - transfer));
+        printf("%.4f[mm]\n", tooth_tip_circle[0]);
     }else{
         tooth_tip_circle[1] = (z + 2) * module + 2*module*(center_distance_increase - transfer);
-        printf("%f\n", (z + 2) * module + 2*module*(center_distance_increase - transfer));
+        printf("%.4f[mm]\n", tooth_tip_circle[1]);
     }
 }
 
 void cal_gear_base_circle(int mode){
     if(mode == 1){
         gear_base_circle[0] = (base_pitch_circle[0]/2)*cos(20*(M_PI/180));
-        printf("%f\n", (base_pitch_circle[0]/2)*cos(20*(M_PI/180)));
+        printf("%.4f[mm]\n", gear_base_circle[0]);
     }else{
-        gear_base_circle[1] = (base_pitch_circle[0]/2)*cos(20*(M_PI/180));
-        printf("%f\n", (base_pitch_circle[1]/2)*cos(20*(M_PI/180)));
+        gear_base_circle[1] = (base_pitch_circle[1]/2)*cos(20*(M_PI/180));
+        printf("%.4f[mm]\n", gear_base_circle[1]);
     }
 }
 
 void cal_engagement_length(double a){
     double result;
 
-    l = sqrt( (tooth_tip_circle[0]*tooth_tip_circle[0])/4 - gear_base_circle[0]*gear_base_circle[0]) + sqrt( (tooth_tip_circle[1]*tooth_tip_circle[1])/4 - gear_base_circle[1]*gear_base_circle[1]);
+    l = sqrt( (tooth_tip_circle[0]/2*tooth_tip_circle[0]/2) - gear_base_circle[0]*gear_base_circle[0]) + sqrt( (tooth_tip_circle[1]/2*tooth_tip_circle[1]/2) - gear_base_circle[1]*gear_base_circle[1] ) - a*sin(engagement_press_angle*(M_PI/180));
 
-    printf("%f\n", l);
+    printf("%.4f[mm]\n", l);
 }
 
 void cal_normal_pitch(double module){
     te = M_PI*module*cos(20*M_PI/180.0);
-    printf("%f\n", te);
+    printf("%.4f[mm]\n", te);
 }
 
 void cal_engagement_rate(){
-    printf("%f\n", l/te);
+    printf("%.4f\n", l/te);
 }
 
 void cal_shaft_torque(int mode, double n_in, double H){
     if(mode == 1){
-        shaft_torque[0] = ((75 * 60) / 2*M_PI*n_in)*H;
-        printf("%f\n", shaft_torque[0]);
+        shaft_torque[0] = ((75 * 60 * H) / (2*M_PI*n_in));
+        printf("%.4f[kgfÅEmm]\n", shaft_torque[0]);
     }else{
-        shaft_torque[1] = ((75 * 60) / 2*M_PI*n_in)*H;
-        printf("%f\n", shaft_torque[1]);
+        shaft_torque[1] = ((75 * 60 * H) / (2*M_PI*n_in));
+        printf("%.4f[kgfÅEmm]\n", shaft_torque[1]);
     }
 }
 
 void cal_varitical_force(int mode){
     if(mode == 1){
-       vartical_force[0] = shaft_torque[0] / gear_base_circle[0];
-       printf("%f\n", vartical_force[0]);
+       vartical_force[0] = shaft_torque[0]*10*10*10/ (gear_base_circle[0]);
+       printf("%.4f[kgf]\n", vartical_force[0]);
     }else{
-       vartical_force[1] = shaft_torque[0] / gear_base_circle[0];
-       printf("%f\n", vartical_force[1]);
+       vartical_force[1] = shaft_torque[1]*10*10*10 / gear_base_circle[1];
+       printf("%.4f[kgf]\n", vartical_force[1]);
     }
 }
 
 void cal_tanquent_force(int mode){
     if(mode == 1){
         tanquent_force[0] = vartical_force[0] * cos(20*M_PI/180.0);
-        printf("%f\n", tanquent_force[0]);
+        printf("%.4f[kgf]\n", tanquent_force[0]);
     }else{
         tanquent_force[1] = vartical_force[1] * cos(20*M_PI/180.0);
-        printf("%f\n", tanquent_force[1]);
+        printf("%.4f[kgf]\n", tanquent_force[1]);
     }
 }
 
-void cal_bending_stress(int mode, double module, double b){
+void cal_bending_stress(int mode, double module, double b, double gear_fatigure){
     if(mode == 1){
-        bending_stress[0] = (tanquent_force[0]/( module*b*cos(engagement_press_angle*M_PI/180.0) ) )*y*K1*K2*K3;
-        printf("%f\n", bending_stress[0]);
+        bending_stress[0] = (tanquent_force[0]*gear_fatigure*K1*K2*K3/( module*b*cos(engagement_press_angle*(M_PI/180.0)) ) );
+        printf("%.4f[kgf/mm2]\n", bending_stress[0]);
     }else{
-        bending_stress[1] = (tanquent_force[1]/( module*b*cos(engagement_press_angle*M_PI/180.0) ) )*y*K1*K2*K3;
-        printf("%f\n", bending_stress[1]);
+        bending_stress[1] = (tanquent_force[1]*gear_fatigure*K1*K2*K3/( module*b*cos(engagement_press_angle*(M_PI/180.0)) ) );
+        printf("%.4f[kgf/mm2]\n", bending_stress[1]);
     }
 }
 
 void cal_curvanture_radius(int mode){
     if(mode == 1){
         curvanture_radius[0] = gear_base_circle[0]*sin(engagement_press_angle*M_PI/180.0);
-        printf("%f\n", curvanture_radius[0]);
+        printf("%.4f[mm]\n", curvanture_radius[0]);
     }else{
         curvanture_radius[1] = gear_base_circle[1]*sin(engagement_press_angle*M_PI/180.0);
-        printf("%f\n", curvanture_radius[1]);
+        printf("%.4f[mm]\n", curvanture_radius[1]);
     }
 }
 
 void cal_compressive_stress(int mode, double b){
+    double young_ratio = (2*pow(10,9)) / (9.8*pow(10, 6));
     if(mode == 1){
-        compressive_stress[0] = sqrt( (0.175*vartical_force[0]*E*K1*K2*K3)/b*curvanture_radius[0]);
-        printf("%f\n", compressive_stress[0]);
+        compressive_stress[0] = sqrt( (0.175*vartical_force[0]*young_ratio*K1*K2*K3)/(b*curvanture_radius[0]) );
+        printf("%.4f[kgf/mm2]\n", compressive_stress[0]);
     }else{
-        compressive_stress[1] = sqrt( (0.175*vartical_force[1]*E*K1*K2*K3)/b*curvanture_radius[1]);
-        printf("%f\n", compressive_stress[1]);
+        compressive_stress[1] = sqrt( (0.175*vartical_force[1]*young_ratio*K1*K2*K3)/(b*curvanture_radius[1]) );
+        printf("%.4f[kgf/mm2]\n", compressive_stress[1]);
     }
 }
 
@@ -192,16 +193,20 @@ void cal_safe_rate(int cal_mode, int mode,  double fatigue){
     if(cal_mode == 1){
         // ã»Ç∞
         if(mode == 1){
-            printf("%f\n", bending_stress[0] / fatigue);
+            safe_rate[0] = ( ( (45*pow(10, 6)) / (9.8*pow(10, 6)) ) / bending_stress[0] );
+            printf("%.4f\n",  safe_rate[0]);
         }else{
-            printf("%f\n", bending_stress[1] / fatigue);
+            safe_rate[0] = ( ( (45*pow(10, 6)) / (9.8*pow(10, 6)) ) / bending_stress[1]);
+            printf("%.4f\n", safe_rate[0]);
         }
     }else{
         // à≥èk
         if(mode == 1){
-            printf("%f\n", compressive_stress[0] / fatigue);
+            safe_rate[1] = ( ( (24.5*pow(10, 6)) / (9.8*pow(10, 6)) ) / compressive_stress[0]);
+            printf("%.4f\n", safe_rate[1]);
         }else{
-            printf("%f\n", bending_stress[1] / fatigue);
+            safe_rate[1] = ( ( (24.5*pow(10, 6)) / (9.8*pow(10, 6)) ) / compressive_stress[1]);
+            printf("%.4f\n", safe_rate[1]);
         }
     }
 }
@@ -228,7 +233,7 @@ void pro_base_tooth_combination(
                     gcd_result = gcd(j,i);
 
                     if( fabs(gosa) < sokuhi * (error/100) ){
-                        printf("%d\t%3d\t%f\t%f\t%f(%f)\n", i, j, sokuhi1, gosa, repeat_frequency, gcd_result);
+                        printf("%d\t%3d\t%.4f\t%.4f\t%.4f(%.4f)\n", i, j, sokuhi1, gosa, repeat_frequency, gcd_result);
                     }
                 } 
             }
@@ -244,7 +249,7 @@ void pro_base_tooth_combination(
             gcd_result = gcd(j,z_min);
 
             if( fabs(gosa) < sokuhi * (error/100) ){
-                printf("%d\t%3d\t%f\t%f\t%f(%f)\n", z_min, j, sokuhi1, gosa, repeat_frequency, gcd_result);
+                printf("%d\t%3d\t%.4f\t%.4f\t%.4f(%.4f)\n", z_min, j, sokuhi1, gosa, repeat_frequency, gcd_result);
             }
         }   
     }
@@ -271,7 +276,7 @@ void pro_other_tooth_combination(double target_sokuhi, double target_error){
 
             if( ( (1-(target_error/100.0))*target_sokuhi < real_sokuhi ) && ( real_sokuhi < (1+(target_error/100.0))*target_sokuhi ) ){
                 real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
-                printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
+                printf("%.4f\t%.4f\t%.4f\t%.4f\n", v[0], v[1], v[2], real_sokuhi);
             }
         }
     }else if(increase_first_stage_gear_ratio_flag == 1){
@@ -288,7 +293,7 @@ void pro_other_tooth_combination(double target_sokuhi, double target_error){
             && v[0] > 0 && v[1] > 0 && v[2] > 0){
 
                 real_error = ( (real_sokuhi - target_sokuhi) / target_sokuhi )*100;
-                printf("%f\t%f\t%f\t%f\n", v[0], v[1], v[2], real_sokuhi);
+                printf("%.4f\t%.4f\t%.4f\t%.4f\n", v[0], v[1], v[2], real_sokuhi);
             }
         }
     }
@@ -719,7 +724,7 @@ void pro_tooth_combination(){
         printf("----------------------------------------------------------------------------------\n");
         printf("----------------------------------------------------------------------------------\n");
         printf("ç≈è¨ë¨î‰\tç≈ëÂë¨î‰\n");
-        printf("%f\t%f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
+        printf("%.4f\t%.4f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
         printf("\n");
 
         break;
@@ -742,42 +747,74 @@ void pro_gear_strength(){
     input_double("éïå^åWêî = ", &gear_fatigue);
     input_double("n_in = ", &n_in);
     input_double("H = ", &H);
-    input_double("ã»Ç∞îÊÇÍå¿ìx = ", &bending_fatigue);
-    input_double("à≥èkîÊÇÍå¿ìx = ", &compression_fatigue);
+    input_double("ã»Ç∞âûóÕÇÃà¿ëSó¶Åiâ∫å¿Åj = ", &bending_fatigue);
+    input_double("à≥èkâûóÕÇÃà¿ëSó¶Åiâ∫å¿Åj = ", &compression_fatigue);
 
     printf("\n");
 
-    printf("ë¨î‰u = %f\n", (double)z2 / (double)z1);
-    printf("äÓèÄÉsÉbÉ`â~íºåad01 = ");
+    printf("\t\t   ë¨î‰u = %.4f\n", (double)z2 / (double)z1);
+    printf("     äÓèÄÉsÉbÉ`â~íºåad01 = ");
     cal_base_pitch_circle(1, module, z1);
-    printf("äÓèÄÉsÉbÉ`â~íºåad02 = ");
+    printf("     äÓèÄÉsÉbÉ`â~íºåad02 = ");
     cal_base_pitch_circle(2, module, z2);
-    printf("Ç©Ç›çáÇ¢ÉsÉbÉ`îºåarb1 = ");
+    printf("   Ç©Ç›çáÇ¢ÉsÉbÉ`îºåarb1 = ");
     cal_engagement_pitch_circle(1, z1, z2, a);
-    printf("Ç©Ç›çáÇ¢ÉsÉbÉ`îºåarb2 = ");
+    printf("   Ç©Ç›çáÇ¢ÉsÉbÉ`îºåarb2 = ");
     cal_engagement_pitch_circle(2, z1, z2, a);    
+    printf("\t      åˆç∑íPà W1 = ");
+    cal_tolerance_unit(1, module);
+    printf("\t      åˆç∑íPà W2 = ");
+    cal_tolerance_unit(2, module);    
+    printf("       íÜêSãóó£ëùâ¡åWêîy = ");
+    cal_center_distance_increase(module, a, z1, z2);
+    printf("\t    Ç©Ç›çáÇ¢äpab = ");
+    cal_engagement_press_angle(z1, z2, a);
     printf("ÉsÉbÉ`â~è„ÉoÉbÉNÉâÉbÉVC0 = ");
     cal_backlush_on_pitch_circle(module, z1, z2);
-    printf("åˆç∑íPà W1 = ");
-    cal_tolerance_unit(1, module);
-    printf("åˆç∑íPà W2 = ");
-    cal_tolerance_unit(2, module);    
-    printf("íÜêSãóó£ëùâ¡åWêîy = ");
-    cal_center_distance_increase(module, a, z1, z2);
-    printf("Ç©Ç›çáÇ¢äpab = ");
-    cal_engagement_press_angle(z1, z2, a);
-    printf("Ç©Ç›çáÇ¢äpab = ");
-    cal_engagement_press_angle(z1, z2, a);
-    printf("ênêÊâ~íºåadk1 = ");
-    cal_tooth_tip_circle(1, z1, module, y ,gear_fatigue);
-    printf("ênêÊâ~íºåadk2 = ");
-    cal_tooth_tip_circle(2, z2,module, y ,gear_fatigue);
-    printf("äÓëbâ~îºåarg1 = ");
+    printf("\t   ênêÊâ~íºåadk1 = ");
+    cal_tooth_tip_circle(1, z1, module, y, 0);
+    printf("\t   ênêÊâ~íºåadk2 = ");
+    cal_tooth_tip_circle(2, z2,module, y, 0);
+    printf("\t   äÓëbâ~îºåarg1 = ");
     cal_gear_base_circle(1);
-    printf("äÓëbâ~îºåarg2 = ");
+    printf("\t   äÓëbâ~îºåarg2 = ");
     cal_gear_base_circle(2);    
-    printf("Ç©Ç›çáÇ¢í∑Ç≥ = ");
+    printf("\t    Ç©Ç›çáÇ¢í∑Ç≥ = ");
     cal_engagement_length(a);
+    printf("\t    ñ@ê¸ÉsÉbÉ`te = ");
+    cal_normal_pitch(module);
+    printf("\t     Ç©Ç›çáÇ¢ó¶É√ = ");
+    cal_engagement_rate();
+    printf("\t    é≤ÇÃÉgÉãÉNTa = ");
+    cal_shaft_torque(1, n_in, H);
+    printf("\t    êÇíºçÏópóÕFn = ");
+    cal_varitical_force(1);
+    printf("\t        ê⁄ê¸óÕP0 = ");
+    cal_tanquent_force(1);
+    printf("       éïé‘1ÇÃã»Ç∞âûóÕÉ–1 = ");
+    cal_bending_stress(1, module, b, gear_fatigue);
+    printf("\t éïé‘1ÇÃà¿ëSó¶Sb = ");
+    cal_safe_rate(1, 1, bending_fatigue);
+    printf("       éïé‘1ÇÃã»ó¶îºåap1 = ");
+    cal_curvanture_radius(1);
+    printf("       éïé‘2ÇÃã»ó¶îºåap1 = ");
+    cal_curvanture_radius(2);
+    printf("        éïé‘ÇÃà≥èkâûóÕÉ–c = ");
+    cal_compressive_stress(1, b);
+    printf("      à≥èkâûóÕÇÃà¿ëSó¶Sc = ");
+    cal_safe_rate(2, 1, compression_fatigue);
 
+    printf("ã»Ç∞âûóÕ\t");
+    if(safe_rate[0] >= bending_fatigue){
+        printf("OK\n");
+    }else{
+        printf("NG\n");
+    }
 
+    printf("à≥èkâûóÕ\t");
+    if(safe_rate[1] >= compression_fatigue){
+        printf("OK\n");
+    }else{
+        printf("NG\n");
+    }
 }
