@@ -1,14 +1,4 @@
-#include "gear.h"
-
-void input_int(char str[], int* data){
-    printf("%s", str);
-    scanf("%d", data);
-}
-
-void input_double(char str[], double* data){
-    printf("%s", str);
-    scanf("%lf", data);
-}
+#include "../Inc/gear.h"
 
 int gcd(int large_number, int small_number){
     int temp;
@@ -537,7 +527,6 @@ void pro_tooth_combination(){
             if(cnt > 0){
                 printf("ğŒ‚ªˆê’v‚µ‚Ü‚¹‚ñB\n");
             }
-
             printf("Å‘å•” = ");
             scanf("%d", &z_max);
 

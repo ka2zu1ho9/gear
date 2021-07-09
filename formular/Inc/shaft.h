@@ -1,9 +1,9 @@
-#include "shaft.h"
+#ifndef _SHAFT_H_
+#define _SHAFT_H_
 
 #include <stdio.h>
 #include <math.h>
-
-const double C[5] = { 0.71, 0.016, 0.1, 0.07, 5.75};
+#include "global_function.h"
 
 typedef struct shaft_input{
     int mode;
@@ -33,13 +33,17 @@ typedef struct shaft_output{
     double safe_rate;
 }output;
 
-void input_int(char str[], int* data);
-void input_double(char str[], double* data);
+input in;
+output out;
+
+extern double shaft_cofficient[5];
 
 void cal_guzai();
 void cal_notch_coefficient();
 void cal_total_moment_amplitude();
 void cal_using_shear_stress();
-void cal_safe_rate();
+void cal_shaft_safe_rate();
 
 void pro_shaft_strengh();
+
+#endif

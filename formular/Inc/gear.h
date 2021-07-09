@@ -1,5 +1,10 @@
+#ifndef _GEAR_H_
+#define _GEAR_H_
+
 #include <stdio.h>
 #include <math.h>
+#include "global_function.h"
+
 
 /* ŒvZƒ‚[ƒh‚Ì” */
 #define MODE_NUMBER 3
@@ -33,9 +38,6 @@ double bending_stress[2];
 double curvanture_radius[2];
 double compressive_stress[2];
 double safe_rate[2];
-
-void input_int(char str[], int* data);
-void input_double(char str[], double* data);
 
 int gcd(int large_number, int small_number);
 
@@ -74,3 +76,5 @@ void pro_other_tooth_combination(double target_sokuhi, double error);
 void pro_tooth_combination();
 
 void pro_gear_strength();
+
+#endif

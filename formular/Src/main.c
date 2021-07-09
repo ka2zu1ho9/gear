@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "gear.h"
-#include "shaft.h"
+#include "../Inc/gear.h"
+#include "../Inc/shaft.h"
 
 int main(void){
     int is_keeping_while = 1;
