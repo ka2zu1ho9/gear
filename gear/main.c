@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "gear.h"
+#include "shaft.h"
 
 int main(void){
     int is_keeping_while = 1;
@@ -24,6 +25,8 @@ int main(void){
             pro_tooth_combination();
         }else if(mode == 1){
             pro_gear_strength();
+        }else if(mode == 2){
+            pro_shaft_strengh();
         }
         
         cnt = 1;

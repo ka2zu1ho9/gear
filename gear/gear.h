@@ -9,9 +9,6 @@
 #define K1 1.0
 #define K2 1.2
 #define K3 1.5
-
-// const double elastic_module = 2 * 10*10*10*10*10*10;
-// const double poason_rate = 0.33;
 #define E  (double)2 * 10*10*10*10*10*10
 
 enum{
