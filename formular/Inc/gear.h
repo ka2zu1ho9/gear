@@ -6,9 +6,9 @@
 #include "global_function.h"
 
 
-/* 計算モードの数 */
+/* ?v?Z???[?h??? */
 #define MODE_NUMBER 3
-/* モータ出力(W[rpm])*/
+/* ???[?^?o??(W[rpm])*/
 #define OUTPUT_OF_MOTOR 7500
 
 #define K1 1.0

@@ -59,10 +59,10 @@ void cal_backlush_on_pitch_circle(double module, int z1, int z2){
 void cal_tolerance_unit(double mode, double module){
     if(mode == 1){
         W[0] = cbrt(base_pitch_circle[0]) + 0.65*module;
-        printf("%.4f[μm]\n", W[0]);
+        printf("%.4f[??m]\n", W[0]);
     }else if(mode == 2){
         W[1] = cbrt(base_pitch_circle[1]) + 0.65*module;
-        printf("%.4f[μm]\n", W[1]);
+        printf("%.4f[??m]\n", W[1]);
     }
 }
 
@@ -70,18 +70,18 @@ void cal_max_and_min_backlush(int mode){
     double gear1_backlush[2];
     double gear2_backlush[2];
     if(mode == 1){
-        //最大
+        //???
         gear1_backlush[0] = 35.5*(W[0] / pow(10,3));
     }else{
-        //最小
+        //???
         gear1_backlush[1] = 10.0*(W[0] / pow(10,3));
     }
     
     if(mode == 1){
-        // 最大
+        // ???
         gear2_backlush[0] = 35.5*(W[1] / pow(10,3));
     }else{
-        // 最小
+        // ???
         gear2_backlush[1] = 10.0*(W[1] / pow(10,3));
     }
 
@@ -152,10 +152,10 @@ void cal_engagement_rate(){
 void cal_shaft_torque(int mode, double n_in, double H){
     if(mode == 1){
         shaft_torque[0] = ((75 * 60 * H) / (2*M_PI*n_in));
-        printf("%.4f[kgf・mm]\n", shaft_torque[0]);
+        printf("%.4f[kgf?Emm]\n", shaft_torque[0]);
     }else{
         shaft_torque[1] = ((75 * 60 * H) / (2*M_PI*n_in));
-        printf("%.4f[kgf・mm]\n", shaft_torque[1]);
+        printf("%.4f[kgf?Emm]\n", shaft_torque[1]);
     }
 }
 
@@ -212,7 +212,7 @@ void cal_compressive_stress(int mode, double b){
 
 void cal_safe_rate(int cal_mode, int mode,  double fatigue){
     if(cal_mode == 1){
-        // 曲げ
+        // ???
         if(mode == 1){
             safe_rate[0] = ( ( (45*pow(10, 6)) / (9.8*pow(10, 6)) ) / bending_stress[0] );
             printf("%.4f\n",  safe_rate[0]);
@@ -221,7 +221,7 @@ void cal_safe_rate(int cal_mode, int mode,  double fatigue){
             printf("%.4f\n", safe_rate[0]);
         }
     }else{
-        // 圧縮
+        // ???k
         if(mode == 1){
             safe_rate[1] = ( ( (24.5*pow(10, 6)) / (9.8*pow(10, 6)) ) / compressive_stress[0]);
             printf("%.4f\n", safe_rate[1]);
@@ -286,7 +286,7 @@ void pro_other_tooth_combination(double target_sokuhi, double target_error){
     v[0] = pow(target_sokuhi, 1.0/3.0);
 
     printf("-----------------------------------------------------------------------------------------------\n");
-    printf("1段目の速比\t2段目の速比\t3段目の速比\t全体の速比\n");
+    printf("1?i??????\t2?i??????\t3?i??????\t?S??????\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     if(increase_first_stage_gear_ratio_flag == 0){
@@ -333,9 +333,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("歯数1 = \n");
+        printf("????1 = \n");
         scanf("%d", &z[0]);
 
     } while (z[0] < 0);
@@ -345,9 +345,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("歯数2 = \n");
+        printf("????2 = \n");
         scanf("%d", &z[1]);
 
     } while (z[1] < 0);
@@ -357,9 +357,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("モジュール = \n");
+        printf("???W???[?? = \n");
         scanf("%d", &module);
 
     } while (module < 0);
@@ -369,9 +369,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("中心距離[mm] = \n");
+        printf("???S????[mm] = \n");
         scanf("%d", &a);
 
     } while (a < 0);
@@ -381,9 +381,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("歯幅[mm] = \n");
+        printf("????[mm] = \n");
         scanf("%d", &a);
 
     } while (b < 0);
@@ -393,9 +393,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("歯数係数 = \n");
+        printf("?????W?? = \n");
         scanf("%d", &gear_coefficient);
 
     } while (gear_coefficient < 0);
@@ -405,9 +405,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("歯数係数 = \n");
+        printf("?????W?? = \n");
         scanf("%d", &n_in);
 
     } while (n_in < 0);
@@ -417,9 +417,9 @@ void pro_gear_strenrth(){
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("動力伝達係数 = \n");
+        printf("????`?B?W?? = \n");
         scanf("%d", &H);
 
     } while (H < 0);
@@ -445,13 +445,13 @@ void pro_tooth_combination(){
     int cnt = 0;
     int mode = 0;
 
-    /* モードを入力 */
+    /* ???[?h????? */
     do
     {
         if(cnt > 0){
-            printf("条件と一致しません。\n");
+            printf("???????v???????B\n");
         }
-        printf("モードを選択してください。(0:1段の歯の組み合わせを求める, 1:全体の速比から、各段の歯の組み合わせを求める, 2:最大の速比と最小の速比を求める)\n");
+        printf("???[?h??I??????????????B(0:1?i?????g????????????, 1:?S????????A?e?i?????g????????????, 2:?????????????????????)\n");
         scanf("%d", &mode);
 
     } while (mode < 0);
@@ -461,16 +461,16 @@ void pro_tooth_combination(){
     switch (mode)
     {
     case known_sokuhi:
-        /* 速比を入力 */
+        /* ???????? */
         do{
-            printf("速比の条件\n");
-            printf("速比 > 1\n");
+            printf("????????\n");
+            printf("???? > 1\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("速比 = ");
+            printf("???? = ");
             scanf("%lf", &sokuhi);
 
             cnt ++;
@@ -478,16 +478,16 @@ void pro_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* 理想速比からの許容範囲を入力 */
+        /* ???z?????????e??????? */
         do{
-            printf("理想速比からの許容範囲の条件\n");
-            printf("理想速比からの許容範囲 > 0\n");
+            printf("???z?????????e???????\n");
+            printf("???z?????????e??? > 0\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("理想速比からの許容範囲 = ");
+            printf("???z?????????e??? = ");
             scanf("%lf", &error);
 
             cnt ++;
@@ -496,22 +496,22 @@ void pro_tooth_combination(){
         cnt = 0;
 
         do{
-            printf("ピニオンはありますか? yes : 0 , no : 1\n");
-            printf("答え = ");
+            printf("?s?j?I???????????? yes : 0 , no : 1\n");
+            printf("???? = ");
             scanf("%d", &is_pinion);
         }while(is_pinion > 1);
         printf("\n");
 
-        /* 最小歯数を入力 */
+        /* ???????????? */
         do{
-            printf("最小歯数の条件\n");
+            printf("????????????\n");
             printf("Minimum gear teeth >= 6\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("最小歯数 = ");
+            printf("??????? = ");
             scanf("%d", &z_min);
 
             cnt ++;
@@ -519,15 +519,15 @@ void pro_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* 最大歯数の入力 */
+        /* ?????????? */
         do{
-            printf("最大歯数の条件\n");
-            printf("最大歯数 > 最小歯数 + 1\n");
+            printf("??????????\n");
+            printf("????? > ??????? + 1\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
-            printf("最大歯数 = ");
+            printf("????? = ");
             scanf("%d", &z_max);
 
             cnt ++;
@@ -536,23 +536,23 @@ void pro_tooth_combination(){
         cnt = 0; 
 
         printf("----------------------------------------------------------------------------------\n");
-        printf("z1\tz2\tz2/z1\t\t誤差\t\t繰り返し頻度(最大公約数)\n");
+        printf("z1\tz2\tz2/z1\t\t??\t\t?J?????p?x(??????)\n");
         printf("----------------------------------------------------------------------------------\n");
         pro_base_tooth_combination(sokuhi, error, z_min, z_max, is_pinion);   
         break;
 
     case unknown_sokuhi:
-        /* 全体の理想速比を入力 */
+        /* ?S?????z???????? */
         do
         {
-            printf("全体の理想速比\n");
-            printf("全体の理想速比 > 1\n");
+            printf("?S?????z????\n");
+            printf("?S?????z???? > 1\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("条件全体の理想速比 = ");
+            printf("?????S?????z???? = ");
             scanf("%lf", &target_sokuhi);
 
             cnt ++;
@@ -562,14 +562,14 @@ void pro_tooth_combination(){
 
         do
         {
-            printf("全体の理想速比からの許容範囲\n");
-            printf("全体の理想速比からの許容範囲 > 0\n");
+            printf("?S?????z?????????e???\n");
+            printf("?S?????z?????????e??? > 0\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("全体の理想速比からの許容範囲= ");
+            printf("?S?????z?????????e???= ");
             scanf("%lf", &target_error);
 
             cnt ++;            
@@ -583,14 +583,14 @@ void pro_tooth_combination(){
         for(int i = 0; i < 3; i++){
             do
             {
-                printf("使用する%d段目の速比の条件\n", i+1);
-                printf("使用する%d段目の速比 > 1\n", i+1);
+                printf("?g?p????%d?i??????????\n", i+1);
+                printf("?g?p????%d?i?????? > 1\n", i+1);
 
                 if(cnt > 0){
-                    printf("条件が一致しません。\n");
+                    printf("????????v???????B\n");
                 }
 
-                printf("使用する%d段目の速比 = ", i+1);
+                printf("?g?p????%d?i?????? = ", i+1);
                 scanf("%lf", &v[i]);
 
                 cnt ++;
@@ -599,16 +599,16 @@ void pro_tooth_combination(){
             cnt = 0;
         }
 
-        /* 理想速比からの許容範囲を入力 */
+        /* ???z?????????e??????? */
         do{
-            printf("理想速比からの許容範囲の条件\n");
-            printf("理想速比からの許容範囲 > 0\n");
+            printf("???z?????????e???????\n");
+            printf("???z?????????e??? > 0\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("理想速比からの許容範囲 = ");
+            printf("???z?????????e??? = ");
             scanf("%lf", &error);
 
             cnt ++;
@@ -617,22 +617,22 @@ void pro_tooth_combination(){
         cnt = 0;
 
         do{
-            printf("ピニオンはありますか? yes : 0 , no : 1\n");
-            printf("答え = ");
+            printf("?s?j?I???????????? yes : 0 , no : 1\n");
+            printf("???? = ");
             scanf("%d", &is_pinion);
         }while(is_pinion > 1);
         printf("\n");
 
-        /* 最小歯数を入力 */
+        /* ???????????? */
         do{
-            printf("最小歯数の条件\n");
+            printf("????????????\n");
             printf("Minimum gear teeth >= 6\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("最小歯数 = ");
+            printf("??????? = ");
             scanf("%d", &z_min);
 
             cnt ++;
@@ -640,16 +640,16 @@ void pro_tooth_combination(){
         printf("\n");
         cnt = 0;
 
-        /* 最大歯数の入力 */
+        /* ?????????? */
         do{
-            printf("最大歯数の条件\n");
-            printf("最大歯数 > 最小歯数 + 1\n");
+            printf("??????????\n");
+            printf("????? > ??????? + 1\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("最大歯数 = ");
+            printf("????? = ");
             scanf("%d", &z_max);
 
             cnt ++;
@@ -662,8 +662,8 @@ void pro_tooth_combination(){
                 is_pinion = 1;
             }
             printf("----------------------------------------------------------------------------------\n");
-            printf("%d段目の条件\n", i+1);
-            printf("z1\tz2\tz2/z1\t\t誤差\t\t繰り返し頻度(最大公約数)\n");
+            printf("%d?i??????\n", i+1);
+            printf("z1\tz2\tz2/z1\t\t??\t\t?J?????p?x(??????)\n");
             printf("----------------------------------------------------------------------------------\n");
             pro_base_tooth_combination(v[i], error, z_min, z_max, is_pinion);   
             printf("\n");
@@ -671,10 +671,10 @@ void pro_tooth_combination(){
 
         do{
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
             
-            printf("かみ合いピッチ円を計算しますか？y : 0, n : 1\n"); 
+            printf("????????s?b?`?~???v?Z????????Hy : 0, n : 1\n"); 
             scanf("%d", &do_cal_engagement_pitch_circle);
             cnt ++;
         } while(do_cal_engagement_pitch_circle > 1);
@@ -683,13 +683,13 @@ void pro_tooth_combination(){
 
         if(do_cal_engagement_pitch_circle == 0){
             for(int i = 0; i < 3; i++){
-                printf("選択したmoduleを一段目から順に入力してください。\n");
+                printf("?I??????module????i?????????????????????B\n");
                 printf("module[%d] = ", i);
                 scanf("%lf", &module[i]);
             }
 
             for(int i = 0; i < 6; i++){
-                printf("選択した歯数を一段目から順に入力してください。\n");
+                printf("?I??????????????i?????????????????????B\n");
                 printf("z[%d] = ", i);
                 scanf("%d", &z[i]);
             }
@@ -709,14 +709,14 @@ void pro_tooth_combination(){
     case calculate_error_of_sokuhi:
         do
         {
-            printf("理想速比の条件\n");
-            printf("理想速比 > 1\n");
+            printf("???z????????\n");
+            printf("???z???? > 1\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("理想速比 = ");
+            printf("???z???? = ");
             scanf("%lf", &target_sokuhi);
 
             cnt ++;            
@@ -726,14 +726,14 @@ void pro_tooth_combination(){
         
         do
         {
-            printf("理想速比からの許容範囲の条件\n");
-            printf("理想速比からの許容範囲 > 0\n");
+            printf("???z?????????e???????\n");
+            printf("???z?????????e??? > 0\n");
 
             if(cnt > 0){
-                printf("条件が一致しません。\n");
+                printf("????????v???????B\n");
             }
 
-            printf("理想速比からの許容範囲 = ");
+            printf("???z?????????e??? = ");
             scanf("%lf", &target_error);
 
             cnt ++;            
@@ -743,7 +743,7 @@ void pro_tooth_combination(){
 
         printf("----------------------------------------------------------------------------------\n");
         printf("----------------------------------------------------------------------------------\n");
-        printf("最小速比\t最大速比\n");
+        printf("???????\t?????\n");
         printf("%.4f\t%.4f\n", (1-target_error)*target_sokuhi, (1+target_error)*target_sokuhi);
         printf("\n");
 
@@ -764,85 +764,85 @@ void pro_gear_strength(){
     input_double("module = ", &module);
     input_double("a = ", &a);
     input_double("b = ", &b);
-    input_double("歯型係数 = ", &gear_fatigue);
+    input_double("???^?W?? = ", &gear_fatigue);
     input_double("n_in = ", &n_in);
     input_double("H = ", &H);
-    input_double("曲げ応力の安全率（下限） = ", &bending_fatigue);
-    input_double("圧縮応力の安全率（下限） = ", &compression_fatigue);
+    input_double("??????????S???i?????j = ", &bending_fatigue);
+    input_double("???k???????S???i?????j = ", &compression_fatigue);
 
     printf("\n");
 
-    printf("\t\t   速比u = %.4f\n", (double)z2 / (double)z1);
-    printf("     基準ピッチ円直径d01 = ");
+    printf("\t\t   ????u = %.4f\n", (double)z2 / (double)z1);
+    printf("     ???s?b?`?~???ad01 = ");
     cal_base_pitch_circle(1, module, z1);
-    printf("     基準ピッチ円直径d02 = ");
+    printf("     ???s?b?`?~???ad02 = ");
     cal_base_pitch_circle(2, module, z2);
-    printf("   かみ合いピッチ半径rb1 = ");
+    printf("   ????????s?b?`???arb1 = ");
     cal_engagement_pitch_circle(1, z1, z2, a);
-    printf("   かみ合いピッチ半径rb2 = ");
+    printf("   ????????s?b?`???arb2 = ");
     cal_engagement_pitch_circle(2, z1, z2, a);    
-    printf("\t      公差単位W1 = ");
+    printf("\t      ?????P??W1 = ");
     cal_tolerance_unit(1, module);
-    printf("\t      公差単位W2 = ");
+    printf("\t      ?????P??W2 = ");
     cal_tolerance_unit(2, module);    
-    printf("       中心距離増加係数y = ");
+    printf("       ???S?????????W??y = ");
     cal_center_distance_increase(module, a, z1, z2);
-    printf("\t    かみ合い角ab = ");
+    printf("\t    ????????pab = ");
     cal_engagement_press_angle(z1, z2, a);
-    printf("ピッチ円上バックラッシC0 = ");
+    printf("?s?b?`?~??o?b?N???b?VC0 = ");
     cal_backlush_on_pitch_circle(module, z1, z2);
-    printf("  最大バックラッシC0_max = ");
+    printf("  ???o?b?N???b?VC0_max = ");
     cal_max_and_min_backlush(1);
-    printf("  最小バックラッシC0_min = ");
+    printf("  ????o?b?N???b?VC0_min = ");
     cal_max_and_min_backlush(2);
-    printf("\t   刃先円直径dk1 = ");
+    printf("\t   ?n??~???adk1 = ");
     cal_tooth_tip_circle(1, z1, module, y, 0);
-    printf("\t   刃先円直径dk2 = ");
+    printf("\t   ?n??~???adk2 = ");
     cal_tooth_tip_circle(2, z2,module, y, 0);
-    printf("\t   基礎円半径rg1 = ");
+    printf("\t   ??b?~???arg1 = ");
     cal_gear_base_circle(1);
-    printf("\t   基礎円半径rg2 = ");
+    printf("\t   ??b?~???arg2 = ");
     cal_gear_base_circle(2);    
-    printf("\t    かみ合い長さ = ");
+    printf("\t    ??????????? = ");
     cal_engagement_length(a);
-    printf("\t    法線ピッチte = ");
+    printf("\t    ?@???s?b?`te = ");
     cal_normal_pitch(module);
-    printf("\t     かみ合い率ε = ");
+    printf("\t     ??????????? = ");
     cal_engagement_rate();
-    printf("\t    軸のトルクTa = ");
+    printf("\t    ????g???NTa = ");
     cal_shaft_torque(1, n_in, H);
-    printf("\t    垂直作用力Fn = ");
+    printf("\t    ??????p??Fn = ");
     cal_varitical_force(1);
-    printf("\t        接線力P0 = ");
+    printf("\t        ?????P0 = ");
     cal_tanquent_force(1);
-    printf("       歯車1の曲げ応力σ1 = ");
+    printf("       ????1?????????1 = ");
     cal_bending_stress(1, module, b, gear_fatigue);
-    printf("\t 歯車1の安全率Sb = ");
+    printf("\t ????1????S??Sb = ");
     cal_safe_rate(1, 1, bending_fatigue);
-    printf("       歯車1の曲率半径p1 = ");
+    printf("       ????1???????ap1 = ");
     cal_curvanture_radius(1);
-    printf("       歯車2の曲率半径p1 = ");
+    printf("       ????2???????ap1 = ");
     cal_curvanture_radius(2);
-    printf("        歯車の圧縮応力σc = ");
+    printf("        ???????k?????c = ");
     cal_compressive_stress(1, b);
-    printf("      圧縮応力の安全率Sc = ");
+    printf("      ???k???????S??Sc = ");
     cal_safe_rate(2, 1, compression_fatigue);
 
-    printf("曲げ応力\t");
+    printf("???????\t");
     if(safe_rate[0] >= bending_fatigue){
         printf("OK\n");
     }else{
         printf("NG\n");
     }
 
-    printf("圧縮応力\t");
+    printf("???k????\t");
     if(safe_rate[1] >= compression_fatigue){
         printf("OK\n");
     }else{
         printf("NG\n");
     }
 
-    printf("バックラッシ\t");
+    printf("?o?b?N???b?V\t");
     if(backlush_lmit[1] <= backlush && backlush <= backlush_lmit[0]){
         printf("OK\n");
     }else{

@@ -63,22 +63,22 @@ void cal_shaft_safe_rate(){
 }
 
 void pro_shaft_strengh(){
-    input_int("åã¢åã¼åã²å£òñá¸åâÆå¢©åá¾å¢¢åáÊå¡äåà¤ñ¼°å¤¯åã¼ì¼?: 1åà?åáÒå¢Áïâ?:2?¼? = ", &in.mode);
-    input_double("ëû²åáÄå¦¤åã¼åã¡åã³åã°è¸±ê»?Mr-x[kgfåã»mm] = ", &in.moment_amplitude[0]);
-    input_double("ëû²åáÄå¦¤åã¼åã¡åã³åã°è¸±ê»?Mr-x[kgfåã»mm] = ", &in.moment_amplitude[1]);
-    input_double("ê»³éı?åá­åáĞå£êåã¢åã¼åã¡åã³åã?[kgfåã»mm] = ", &in.Tav);
-    input_double("ê¾Êç¼µñùºæ¼¾é¤»[kgf/mm^2] = ", &in.sigma_y_p);
-    input_double("éûÜê»¢íö²åâ¸ëÑğê¼¦[kgf/mm^2] = ", &in.sigma_e_B);
-    input_double("åáÖå£óëö­ñùºæ¼¾é¤»[kgf/mm^2] = ", &in.tau_y_p);
+    input_int("ƒL[a:1,‚·‚İ“÷:2 = ", &in.mode);
+    input_double("‹È‚°ƒ‚[ƒƒ“ƒg‚ÌU•x¬•ª Mr_x[kgfEmm] = ", &in.moment_amplitude[0]);
+    input_double("‹È‚°ƒ‚[ƒƒ“ƒg‚ÌU•y¬•ª Mr_y[kgfEmm] = ", &in.moment_amplitude[1]);
+    input_double("•½‹Ï‚Ë‚¶‚èƒ‚[ƒƒ“ƒg Tav[kgfEmm] = ", &in.Tav);
+    input_double("ˆø’£~•š“_ ƒĞy_p[kgf/mm^2] = ", &in.sigma_y_p);
+    input_double("‰ñ“]‹È‚°”æ‚êŒÀ“x ƒĞe_B[kgf/mm^2] = ", &in.sigma_e_B);
+    input_double("‚¹‚ñ’f~•š“_ ƒÑy_p[kgf/mm^2] = ", &in.tau_y_p);
+    input_double("ˆø’£‹­‚³ ƒĞB[kgf/mm^2] = ", &in.sigma_B);
 
     if(in.mode == 1){
-        input_double("èº¸ì¥ÄéÖ¶êÀ?d[mm] = ", &in.sigma_y_p);
-        input_double("éè?åâ´è¬?åáºæ¿¤èÊ² = ", &in.K);
+        input_double("’¼Œa d[mm] = ", &in.sigma_y_p);
+        input_double("Ø‚èŒ‡‚«ŒW” K = ", &in.K);
     }else{
-        input_double("ê¾Êç¼µñùºç¼·åáÉ¼kgf/mm^2] = ", &in.sigma_B);
-        input_double("èº¸ì¥ÄéÖ¶êÀ??¼°ç¤ª?¼±¥[mm] = ", &in.D);
-        input_double("èº¸ì¥ÄéÖ¶êÀ??¼°é´°?¼±Å[mm] = ", &in.d);
-        input_double("åáÒå¢Áïâ²ç¹êêÀ§Ñ[mm] = ", &in.rowe);
+        input_double("’¼Œai‘¾jD[mm] = ", &in.D);
+        input_double("’¼Œai×jd[mm] = ", &in.d);
+        input_double("‚·‚İ“÷”¼Œa ƒÏ[mm] = ", &in.rowe);
     }
 
     cal_guzai();
