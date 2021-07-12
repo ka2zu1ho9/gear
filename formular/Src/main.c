@@ -19,7 +19,7 @@ int main(void){
             }
         }
 
-        input_int("mode = (0:tooth_combination, 1:gear_strength)", &mode);
+        input_int("mode = (0:tooth_combination, 1:gear_strength, 2:shaft_strength)", &mode);
 
         if(mode == 0){
             pro_tooth_combination();

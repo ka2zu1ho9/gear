@@ -7,23 +7,23 @@ void cal_guzai(){
         switch (i)
         {
         case 0:
-            out.guzai[i] = shaft_cofficient[0] + shaft_cofficient[1]*in.sigma_B;
-            printf("%f\n", out.guzai[i]);
+            out.guzai[0] = shaft_cofficient[0] + shaft_cofficient[1]*in.sigma_B;
+            printf("ƒÌ1 = %f\n", out.guzai[0]);
             break;
 
         case 1:
-            out.guzai[i] = 1 - exp(-shaft_cofficient[2]*in.d);
-            printf("%f\n", out.guzai[i]);
+            out.guzai[1] = 1 - exp(-shaft_cofficient[2]*in.d);
+            printf("ƒÌ2 = %f\n", out.guzai[1]);
             break;
 
         case 2:
-            out.guzai[i] = 1 - exp( (-shaft_cofficient[3]*in.d) / in.rowe);
-            printf("%f\n", out.guzai[i]);
+            out.guzai[2] = 1 - exp( (-shaft_cofficient[3]*in.d) / in.rowe);
+            printf("ƒÌ3 = %f\n", out.guzai[2]);
             break;
 
         case 3:
-            out.guzai[i] = 1 - exp( -shaft_cofficient[4]*(1 - in.d / in.D) );
-            printf("%f\n", out.guzai[i]);
+            out.guzai[3] = 1 - exp( -shaft_cofficient[4]*(1 - in.d / in.D) );
+            printf("ƒÌ4 = %f\n", out.guzai[3]);
             break;
         default:
             break;
@@ -41,20 +41,20 @@ void cal_notch_coefficient(){
 
     out.notch_coefficient = 1 + total_guzai;
 
-    printf("%f\n", out.notch_coefficient);
+    printf("‚·‚İ“÷•”‚ÌØ‚èŒ‡‚«ŒW”K = %f\n", out.notch_coefficient);
     
 }
 
 
 void cal_total_moment_amplitude(){
     out.total_moment_amplitude = sqrt(in.moment_amplitude[0]*in.moment_amplitude[0] + in.moment_amplitude[1]*in.moment_amplitude[1]);
-    printf("%f\n", out.total_moment_amplitude);
+    printf("‹È‚°ƒ‚[ƒƒ“ƒg‚ÌU•Mr = %f[kgfEmm]\n", out.total_moment_amplitude);
 }
 
 
 void cal_using_shear_stress(){
     out.using_shear_stress = (16*sqrt( ( (out.notch_coefficient*in.sigma_y_p*out.total_moment_amplitude) / in.sigma_e_B )*( (out.notch_coefficient*in.sigma_y_p*out.total_moment_amplitude) / in.sigma_e_B ) + in.Tav*in.Tav )) / (M_PI*in.d*in.d*in.d);
-    printf("%f[kg/mm^2]\n", out.using_shear_stress);
+    printf("²‚Ìg—p‚¹‚ñ’f‰—ÍƒÑ = %f[kg/mm^2]\n", out.using_shear_stress);
 }
 
 void cal_shaft_safe_rate(){
@@ -70,21 +70,27 @@ void pro_shaft_strengh(){
     input_double("ˆø’£~•š“_ ƒĞy_p[kgf/mm^2] = ", &in.sigma_y_p);
     input_double("‰ñ“]‹È‚°”æ‚êŒÀ“x ƒĞe_B[kgf/mm^2] = ", &in.sigma_e_B);
     input_double("‚¹‚ñ’f~•š“_ ƒÑy_p[kgf/mm^2] = ", &in.tau_y_p);
-    input_double("ˆø’£‹­‚³ ƒĞB[kgf/mm^2] = ", &in.sigma_B);
 
     if(in.mode == 1){
-        input_double("’¼Œa d[mm] = ", &in.sigma_y_p);
+        input_double("’¼Œa d[mm] = ", &in.d);
         input_double("Ø‚èŒ‡‚«ŒW” K = ", &in.K);
     }else{
+        input_double("ˆø’£‹­‚³ ƒĞB[kgf/mm^2] = ", &in.sigma_B);
         input_double("’¼Œai‘¾jD[mm] = ", &in.D);
         input_double("’¼Œai×jd[mm] = ", &in.d);
         input_double("‚·‚İ“÷”¼Œa ƒÏ[mm] = ", &in.rowe);
     }
 
-    cal_guzai();
-    cal_notch_coefficient();
-    cal_total_moment_amplitude();
-    cal_using_shear_stress();
-    cal_shaft_safe_rate();
+    if(in.mode == 1){
+        cal_total_moment_amplitude();
+        cal_using_shear_stress();
+        cal_shaft_safe_rate();
+    }else{
+        cal_guzai();
+        cal_notch_coefficient();
+        cal_total_moment_amplitude();
+        cal_using_shear_stress();
+        cal_shaft_safe_rate();
+    }
 }
 
